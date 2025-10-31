@@ -71,6 +71,11 @@ public class OrdersAPIController {
         }
     }
 
+    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    public Order getTableOrderById(@PathVariable("id") int id) {
+        return restaurantOrderServicesStub.getTableOrder(id);
+    }
+
     @RequestMapping(value = "/tables/total",method = RequestMethod.GET)
     public Set<Order> calculateTableBillTotal(){
         return restaurantOrderServicesStub.calculateTableBillTotal();
