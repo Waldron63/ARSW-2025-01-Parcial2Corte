@@ -31,7 +31,8 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author hcadavid
  */
-@RestController("/orders")
+@RestController
+@RequestMapping("/orders")
 public class OrdersAPIController {
 
     @Autowired
@@ -41,7 +42,7 @@ public class OrdersAPIController {
         restaurantOrderServicesStub = new RestaurantOrderServicesStub();
     }
 
-    @PostMapping("")
+    @RequestMapping(value = "",method = RequestMethod.POST)
     public void addOrderToTable(@RequestBody Order order) {
         try {
             restaurantOrderServicesStub.addNewOrderToTable(order);
@@ -51,23 +52,18 @@ public class OrdersAPIController {
         }
     }
 
-    @GetMapping("")
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public Set<Integer> getAllTableWithOrders() {
         return restaurantOrderServicesStub.getTablesWithOrders();
     }
 
-    @GetMapping("/{id}")
-    public Order getTableOrderById(@PathVariable int id) {
-        return restaurantOrderServicesStub.getTableOrder(id);
-    }
-
-    @GetMapping("/products")
+    @RequestMapping(value = "/products",method = RequestMethod.GET)
     public Set<String> getAvailableProducts(){
         return restaurantOrderServicesStub.getAvailableProductNames();
     }
 
-    @GetMapping("/products/{name}")
-    public RestaurantProduct getAvailableProductsByBame(@PathVariable String name){
+    @RequestMapping(value = "/products/{name}",method = RequestMethod.GET)
+    public RestaurantProduct getAvailableProductsByBame(@PathVariable("name")  String name){
         try {
             return restaurantOrderServicesStub.getProductByName(name);
         } catch (OrderServicesException e) {
@@ -75,14 +71,14 @@ public class OrdersAPIController {
         }
     }
 
-    @GetMapping("/tables/total")
+    @RequestMapping(value = "/tables/total",method = RequestMethod.GET)
     public Set<Order> calculateTableBillTotal(){
         return restaurantOrderServicesStub.calculateTableBillTotal();
     }
 
 
-    @GetMapping("/tables/{id}")
-    public int calculateTableBill(@PathVariable int id){
+    @RequestMapping(value = "/tables/{id}",method = RequestMethod.GET)
+    public int calculateTableBill(@PathVariable("id")  int id){
         try {
             return restaurantOrderServicesStub.calculateTableBill(id);
         } catch (OrderServicesException e) {
@@ -90,8 +86,8 @@ public class OrdersAPIController {
         }
     }
 
-    @DeleteMapping("/{tableNumber}")
-    public void releaseTable(@PathVariable int tableNumber){
+    @RequestMapping(value = "/{tableNumber}",method = RequestMethod.DELETE)
+    public void releaseTable(@PathVariable("tableNumber") int tableNumber){
         try {
             restaurantOrderServicesStub.releaseTable(tableNumber);
         }catch (OrderServicesException e){
