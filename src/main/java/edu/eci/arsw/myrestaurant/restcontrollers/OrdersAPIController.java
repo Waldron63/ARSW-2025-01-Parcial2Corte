@@ -71,7 +71,7 @@ public class OrdersAPIController {
         }
     }
 
-    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public Order getTableOrderById(@PathVariable("id") int id) {
         return restaurantOrderServicesStub.getTableOrder(id);
     }
