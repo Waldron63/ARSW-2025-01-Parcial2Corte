@@ -20,14 +20,8 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
     @Autowired
     BillCalculator calc;
-    @Autowired
-    BillWithTaxesCalculator calcTaxes;
 
     public RestaurantOrderServicesStub() {
-    }
-
-    public void setCalculatorTaxes(BillWithTaxesCalculator calcTaxes){
-        this.calcTaxes = calcTaxes;
     }
 
     public void setBillCalculator(BillCalculator calc) {
