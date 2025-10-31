@@ -17,19 +17,14 @@
 package edu.eci.arsw.myrestaurant.restcontrollers;
 
 import edu.eci.arsw.myrestaurant.model.Order;
-import edu.eci.arsw.myrestaurant.model.ProductType;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.services.OrderServicesException;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServicesStub;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
-import org.aspectj.weaver.ast.Or;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -79,6 +74,12 @@ public class OrdersAPIController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/tables/total")
+    public Set<Order> calculateTableBillTotal(){
+        return restaurantOrderServicesStub.calculateTableBillTotal();
+    }
+
 
     @GetMapping("/tables/{id}")
     public int calculateTableBill(@PathVariable int id){

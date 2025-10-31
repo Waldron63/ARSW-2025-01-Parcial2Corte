@@ -28,5 +28,6 @@ public interface RestaurantOrderServices {
     Set<Integer> getTablesWithOrders();
 
     void releaseTable(int tableNumber) throws OrderServicesException;
-    
+
+    Set<Order> calculateTableBillTotal();
 }

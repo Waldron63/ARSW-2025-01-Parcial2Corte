@@ -1,11 +1,14 @@
 package edu.eci.arsw.myrestaurant.services;
 
 
+import edu.eci.arsw.myrestaurant.beans.impl.BillWithTaxesCalculator;
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.model.ProductType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 import java.util.Set;
@@ -14,10 +17,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
-    
-    BillCalculator calc = null;
+    BillCalculator calc;
+    BillWithTaxesCalculator calcTaxes;
 
     public RestaurantOrderServicesStub() {
+    }
+
+    public void setCalculatorTaxes(BillWithTaxesCalculator calcTaxes){
+        this.calcTaxes = calcTaxes;
     }
 
     public void setBillCalculator(BillCalculator calc) {
@@ -45,6 +52,11 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         } else {
             return productsMap.get(product);
         }
+    }
+
+    @Override
+    public Set<Order> calculateTableBillTotal(){
+        return null;
     }
 
     @Override
