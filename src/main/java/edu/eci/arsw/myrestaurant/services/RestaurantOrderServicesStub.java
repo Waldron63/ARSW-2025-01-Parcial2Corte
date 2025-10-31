@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,7 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
+    @Autowired
     BillCalculator calc;
+    @Autowired
     BillWithTaxesCalculator calcTaxes;
 
     public RestaurantOrderServicesStub() {
@@ -56,7 +59,13 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
     @Override
     public Set<Order> calculateTableBillTotal(){
-        return null;
+        Set<Order> resp = new HashSet();
+        for (int i : tableOrders.keySet()){
+            Order o = tableOrders.get(i);
+            o.setTotal(calc.calculateBill(o,productsMap));
+            resp.add(o);
+        }
+        return resp;
     }
 
     @Override

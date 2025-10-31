@@ -19,6 +19,8 @@ public class Order {
     }
     private int tableNumber;
 
+    private int total;
+
     public Order() {
     }    
     
@@ -42,6 +44,14 @@ public class Order {
             int previousAmount=orderAmountsMap.get(p);
             orderAmountsMap.put(p, previousAmount+amount);
         }
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getTotal() {
+        return total;
     }
 
     @JsonIgnore
